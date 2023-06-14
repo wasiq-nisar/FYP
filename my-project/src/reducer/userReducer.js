@@ -1,7 +1,7 @@
 export const initialState = null;
 export const reducer = (state, action) => {
   if (action.type === "admin") {
-    //* payload ki value jo hum ne de ha wo mil gai ha
+    console.log("hello this is manager admin");
     return action.payload;
   }
   if (action.type === "hrmanager") {

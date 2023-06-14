@@ -25,16 +25,16 @@ const Sidebar = () => {
 
   const { state, dispatch } = useContext(userContext);
   const UserLoggedIN = () => {
-    console.log('In Side Bar:' + state);
+    console.log("In Side Bar:" + state);
     if (state === "" || state === null) {
       return (
-        <div className="dashboard py-4 px-2 flex-col  text-[14px]">
+        <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {nouserdata.map((l) => (
             <div className="group">
-              <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
+              <div className="py-1 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                 <h1
                   key={l.id}
-                  className="text-xl px-2 font-bold hover:text-white text-black"
+                  className="text-xl px-2 font-semibold hover:text-white text-black"
                 >
                   {l.name}
                 </h1>
@@ -75,15 +75,15 @@ const Sidebar = () => {
         </div>
       );
     }
-    if (state == "admin") {
+    if (state === "admin") {
       return (
-        <div className="dashboard py-4 px-2 flex-col  text-[14px]">
+        <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {admindata.map((l) => (
             <div className="group">
-              <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
+              <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                 <h1
                   key={l.id}
-                  className="text-xl px-2 font-bold hover:text-white text-black"
+                  className="text-xl px-1 font-semibold hover:text-white text-black"
                 >
                   {l.name}
                 </h1>
@@ -126,7 +126,7 @@ const Sidebar = () => {
     }
     if (state == "hrmanager") {
       return (
-        <div className="dashboard py-4 px-2 flex-col  text-[14px]">
+        <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {hrdata.map((l) => (
             <div className="group">
               <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
@@ -175,7 +175,7 @@ const Sidebar = () => {
     }
     if (state == "orderadmin") {
       return (
-        <div className="dashboard py-4 px-2 flex-col  text-[14px]">
+        <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {data.map((l) => (
             <div className="group">
               <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
@@ -224,7 +224,7 @@ const Sidebar = () => {
     }
     if (state == "inventorymanager") {
       return (
-        <div className="dashboard py-4 px-2 flex-col  text-[14px]">
+        <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {inventorydata.map((l) => (
             <div className="group">
               <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
@@ -272,7 +272,11 @@ const Sidebar = () => {
       );
     }
   };
-  return <></>;
+  return (
+    <>
+      <UserLoggedIN />
+    </>
+  );
 };
 
 export default Sidebar;
