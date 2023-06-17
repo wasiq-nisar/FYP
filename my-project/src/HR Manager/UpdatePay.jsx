@@ -1,7 +1,81 @@
-import React from "react";
-import img from "../assets/blueBackgroundImage.jpg";
+import React, { useEffect, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UpdatePay = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const [im, setIm] = useState([]);
+  var imgVal = "";
+  const id = params._id;
+
+  const callAboutUrlFromBackend = async () => {
+    let res;
+    try {
+      const path = "http://localhost:8000/api/users/" + id;
+      res = await fetch(path, {
+        method: "GET",
+      });
+    } catch (e) {
+      console.log("rror", e);
+    }
+
+    if (res.status === 400) {
+      console.log("no credential found");
+      //navigate("/Login");
+      return;
+    }
+    //* if data is not found
+    if (res.status === 200);
+    {
+      const data1 = await res.json();
+      //* is data ma sarraa user ka dataaa jay ga
+      setData(data1[0]);
+      let imgv = data.image;
+      imgVal =
+        "http://localhost:8000/uploads/" + data1[0].image.split("/").at(-1);
+
+      setIm(imgVal);
+      navigate("/PayrollManagment");
+    }
+  };
+
+  useEffect(() => {
+    callAboutUrlFromBackend();
+  }, []);
+
+  const handlechange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log(data);
+      const res = await axios.patch(
+        "http://localhost:8000/api/users/" + id,
+        data
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      // if(error.response.data){
+      //   setError(error.response.data.msg);
+      // }
+      // else{
+      //   setError(null);
+      // }
+    }
+  };
+
   return (
     <div className="bg-white  mx-2 my-2">
       <h1 className="flex justify-center pb-2 font-bold text-2xl">
