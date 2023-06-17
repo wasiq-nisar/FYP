@@ -16,7 +16,7 @@ const Topbar = () => {
           <NotificationsIcon></NotificationsIcon>
           <LanguageIcon></LanguageIcon>
           <SettingsIcon></SettingsIcon>
-          <h1 className="text-xl font-semibold bg-orange-600 rounded-xl text-white px-3 py-1">
+          <h1 className="text-xl font-semibold bg-slate-400 rounded-xl  px-3 py-1">
             Login
           </h1>
           <div className="block lg:hidden" onClick={() => isClicked(!clicked)}>

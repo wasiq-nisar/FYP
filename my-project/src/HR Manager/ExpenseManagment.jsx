@@ -70,7 +70,7 @@ const ExpenseManagment = () => {
           <div className="flex">
             <div>
               {/* todo is tarha hum url ma wo id send karin gay */}
-              <Link key={params.row.id} to={"/UpdateAssests/" + params.row.id}>
+              <Link key={params.row.id} to={"/AddExpense/" + params.row.id}>
                 <button className="bg-green-700 text-white px-2 py-2 rounded-xl">
                   Add Expense
                 </button>

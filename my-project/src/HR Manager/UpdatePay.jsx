@@ -50,9 +50,9 @@ const UpdatePay = () => {
           className="border-b-4 w-full rounded-xl px-2 border-gray-800 text-white bg-gray-600 focus:outline-none focus:border-b-gray-800"
           type="number"
         />
-        <div className="flex justify-center">
+        <div className="flex items-center  justify-center">
           <input
-            className="px-2 py-2 my-2 flex justify-center bg-gray-300 rounded-3xl"
+            className="px-2 py-2 my-2 w-1/3 hover:transition hover:bg-slate-900 hover:text-white hover:duration-500  flex justify-center bg-gray-300 rounded-3xl"
             type="submit"
             value="Update Pay"
           />

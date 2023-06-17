@@ -35,6 +35,7 @@ const Routing = () => {
   return (
     <>
       <Routes>
+        <Route exact path="/" element={<Login />} />
         {/* first will be login */}
         {/* <Route path="/" element={<Home />} /> */}
         <Route exact path="/AdminDashboard" element={<AdminDashboard />} />
@@ -76,16 +77,17 @@ const Routing = () => {
         {/* end of Inventory Manager */}
         {/* Start of Hr manager */}
         <Route exact path="/ExpenseManagment" element={<ExpenseManagment />} />
-        <Route exact path="/AddExpense" element={<AddExpense />} />
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/AddExpense/:id" element={<AddExpense />} />
+
         <Route
           exact
           path="/EmployeeAttendence"
           element={<EmployeeAttendence />}
         />
         <Route exact path="/EmployeeLeave/:id" element={<EmployeeLeave />} />
+
         <Route exact path="/PayrollManagment" element={<PayrollManagment />} />
-        <Route exact path="/UpdatePay" element={<UpdatePay />} />
+        <Route exact path="/UpdatePay/:id" element={<UpdatePay />} />
         {/* end of hr */}
         {/* start of order Manager */}
         <Route exact path="/ProductInfo" element={<ProductInfo />} />

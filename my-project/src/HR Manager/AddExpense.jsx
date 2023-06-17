@@ -10,6 +10,17 @@ const AddExpense = () => {
         <div className="flex-col">
           <div>
             <label className="px-4 flex justify-center text-2xl fond-bold">
+              Expense Name
+            </label>
+          </div>
+          <div className="flex justify-center">
+            <input
+              className="border-b-4 w-3/4 flex justify-center rounded-xl px-2 border-gray-800 text-white bg-gray-600 focus:outline-none focus:border-b-gray-800"
+              type="text"
+            />
+          </div>
+          <div>
+            <label className="px-4 flex justify-center text-2xl fond-bold">
               Expense detail
             </label>
           </div>
