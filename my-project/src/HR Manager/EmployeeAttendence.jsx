@@ -6,25 +6,31 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import img from "../assets/mypic.jpg";
 const EmployeeAttendence = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const params = useParams();
   const MarkPresent = async () => {
-    const id = params._id;
-    const present = "present";
+    const userid = params.id;
+
+    const value = "present";
     // todo idher hum ne url change karna ha
     const res = await fetch("http://localhost:8000/api/attendence/", {
       method: "POST",
-
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        id,
-        present,
+        value,
+        userid,
       }),
     });
     const data = await res.json();
-    console.log(data);
+    console.log("the attendence data is :", data);
     if (res.status === 422 || !data) {
       window.alert("Error Attendence  failed");
-    } else {
+    } else if (res.status === 200) {
       window.alert("Attendence Marked succesfull");
       navigate("/EmployeeAttendence/");
     }
@@ -51,7 +57,6 @@ const EmployeeAttendence = () => {
       const data = await res.json();
       //* is data ma sarraa user ka dataaa jay ga
       setData(data);
-      console.log(data);
     }
   };
 
@@ -121,7 +126,7 @@ const EmployeeAttendence = () => {
             </div>
             <div>
               <Link
-                key={params.row.id}
+                key={params.row._id}
                 to={"/EmployeeAttendence/" + params.row._id}
               >
                 <button
