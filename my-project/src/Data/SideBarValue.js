@@ -17,6 +17,7 @@ export const HRSideBarLinks = [
   { id: 1, name: "Expense Managment", link: "/ExpenseManagment" },
   { id: 2, name: "Employee Attendence", link: "/EmployeeAttendence" },
   { id: 3, name: "Payroll Managment", link: "/PayrollManagments" },
+  { id: 4, name: "Attendence Record", link: "/AttendenceRecordPerMonth" },
 ];
 
 // todo this is the OrderAdmin side bar

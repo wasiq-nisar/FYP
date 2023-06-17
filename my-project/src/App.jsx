@@ -27,6 +27,7 @@ import UpdateManagerInfo from "./AdminPages/UpdateManagerInfo";
 import AdminDashboard from "./AdminPages/AdminDashboard";
 import ShowAllProducts from "./OrderManager/ShowAllProducts";
 import UpdateAndDeleteManager from "./AdminPages/UpdateAndDeleteManager";
+import AttendenceRecordPerMonth from "./HR Manager/AttendenceRecordPerMonth";
 //* to import the reducer function
 import { initialState, reducer } from "./reducer/userReducer";
 import Login from "./Login/Login";
@@ -88,6 +89,11 @@ const Routing = () => {
 
         <Route exact path="/PayrollManagment" element={<PayrollManagment />} />
         <Route exact path="/UpdatePay/:id" element={<UpdatePay />} />
+        <Route
+          exact
+          path="/AttendenceRecordPerMonth"
+          element={<AttendenceRecordPerMonth />}
+        />
         {/* end of hr */}
         {/* start of order Manager */}
         <Route exact path="/ProductInfo" element={<ProductInfo />} />
