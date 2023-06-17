@@ -24,8 +24,9 @@ const getAttendenceByUserID = async (req, res) => {
 
 const addAttendce = async (req, res) => {
   try {
-    const { value, userid } = req.body;
-    const attendence = await Attendence.create({ value, userid });
+    const { value, userid, description } = req.body;
+    console.log(req.body);
+    const attendence = await Attendence.create({ value, userid, description });
     console.log("hello:" + attendence);
     res.status(200).json(attendence);
   } catch (error) {

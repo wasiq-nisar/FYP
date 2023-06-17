@@ -10,6 +10,10 @@ const attendenceSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "userSchema",
     },
+    description: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

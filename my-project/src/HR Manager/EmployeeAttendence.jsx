@@ -11,7 +11,7 @@ const EmployeeAttendence = () => {
   const params = useParams();
   const MarkPresent = async () => {
     const userid = params.id;
-
+    const description = "null";
     const value = "present";
     // todo idher hum ne url change karna ha
     const res = await fetch("http://localhost:8000/api/attendence/", {
@@ -24,6 +24,7 @@ const EmployeeAttendence = () => {
       body: JSON.stringify({
         value,
         userid,
+        description,
       }),
     });
     const data = await res.json();
