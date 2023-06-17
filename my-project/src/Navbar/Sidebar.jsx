@@ -79,7 +79,7 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {admindata.map((l) => (
-            <Link to={l.link}>
+            <NavLink to={l.link}>
               <div className="group">
                 <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                   <h1
@@ -124,7 +124,7 @@ const Sidebar = () => {
                   </div>
                 )}
               </div>
-            </Link>
+            </NavLink>
           ))}
         </div>
       );
@@ -133,7 +133,7 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {admindata.map((l) => (
-            <Link to={l.link}>
+            <NavLink to={l.link}>
               <div className="group">
                 <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                   <h1
@@ -178,7 +178,7 @@ const Sidebar = () => {
                   </div>
                 )}
               </div>
-            </Link>
+            </NavLink>
           ))}
         </div>
       );
@@ -187,7 +187,7 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {data.map((l) => (
-            <Link to={l.link}>
+            <NavLink to={l.link}>
               <div className="group">
                 <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                   <h1
@@ -232,7 +232,7 @@ const Sidebar = () => {
                   </div>
                 )}
               </div>
-            </Link>
+            </NavLink>
           ))}
         </div>
       );
@@ -241,7 +241,7 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {inventorydata.map((l) => (
-            <Link to={l.link}>
+            <NavLink to={l.link}>
               <div className="group">
                 <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                   <h1
@@ -286,7 +286,7 @@ const Sidebar = () => {
                   </div>
                 )}
               </div>
-            </Link>
+            </NavLink>
           ))}
         </div>
       );
