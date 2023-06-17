@@ -1,66 +1,115 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import img from "../assets/mypic.jpg";
 const EmployeeAttendence = () => {
-  //todo is ma hum data to dosri file se export kar ke yaha lay gay
-  // todo idher hum ne sab data(row) rowData ma pass kar diya ha
-  // const [rowData, setRowData] = useState(rows);
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const params = useParams();
+  const MarkPresent = async () => {
+    const userid = params.id;
+    const description = "null";
+    const value = "present";
+    // todo idher hum ne url change karna ha
+    const res = await fetch("http://localhost:8000/api/attendence/", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        value,
+        userid,
+        description,
+      }),
+    });
+    const data = await res.json();
+    console.log("the attendence data is :", data);
+    if (res.status === 422 || !data) {
+      window.alert("Error Attendence  failed");
+    } else if (res.status === 200) {
+      window.alert("Attendence Marked succesfull");
+      navigate("/EmployeeAttendence/");
+    }
+  };
 
-  // todo these are the heading tags of the table
-  const columns = [
-    { field: "id", headerName: "ID", width: 35 },
-    // todo renderCell se hum apni marzi ki output show kar sakty ha
+  const callAboutUrlFromBackend = async () => {
+    let res;
+    try {
+      res = await fetch("http://localhost:8000/api/users/", {
+        method: "GET",
+      });
+    } catch (e) {
+      console.log("rror", e);
+    }
+
+    if (res.status === 400) {
+      console.log("no credential found");
+      //navigate("/Login");
+      return;
+    }
+    //* if data is not found
+    if (res.status === 200);
     {
-      //* is se b datashow ho jay ga magar renderCell se data ko hum customize kar sakin gay
-      field: "img",
-      // todo this is the table header name
+      const data = await res.json();
+      //* is data ma sarraa user ka dataaa jay ga
+      setData(data);
+    }
+  };
+
+  useEffect(() => {
+    callAboutUrlFromBackend();
+  }, []);
+
+  const columns = [
+    { field: "_id", headerName: "ID", width: 135 },
+
+    {
+      field: "image",
+
       headerName: "Image",
       width: 60,
-      // todo idher hum image b add kar sakty ha our jo b data ho color wegrar b de sakty ha
+
       renderCell: (params) => {
+        console.log(params.row.image);
         return (
           <div>
             <img
               className="w-12 h-8 rounded-full"
-              src={img}
-              alt={params.row.firstName}
+              src={
+                "http://localhost:8000/uploads/" +
+                params.row.image.split("/").at(-1)
+              }
             />
           </div>
         );
       },
     },
     {
-      //* is se b datashow ho jay ga magar renderCell se data ko hum customize kar sakin gay
-      field: "firstName",
-      // todo this is the table header name
-      headerName: "First name",
-      width: 85,
-      // todo idher hum image b add kar sakty ha our jo b data ho color wegrar b de sakty ha
-      renderCell: (params) => {
-        return <div>{params.row.firstName}</div>;
-      },
+      field: "name",
+      headerName: "Name",
+      width: 130,
     },
-    { field: "lastName", headerName: "Last name", width: 130 },
+    { field: "phone", headerName: "phone", width: 130 },
+    { field: "cnic", headerName: "cnic", width: 130 },
+    { field: "address", headerName: "address", width: 130 },
     {
-      field: "age",
-      headerName: "Age",
+      field: "username",
+      headerName: "Username",
       type: "number",
-      width: 45,
+      width: 90,
     },
     {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 120,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+      field: "type",
+      headerName: "User Type",
+      type: "number",
+      width: 90,
     },
-    // ! important
-    //* this is how we create the additional html items in table
-    // todo here we can edit and delete buttons
+
     {
       feild: "actions",
       headerName: "actions",
@@ -70,16 +119,24 @@ const EmployeeAttendence = () => {
           <div className="flex gap-2">
             <div>
               {/* todo is tarha hum url ma wo id send karin gay */}
-              <Link key={params.row.id} to={"/EmployeeLeave/" + params.row.id}>
-                <button className="bg-blue-600 text-white px-2 py-2 rounded-xl">
+              <Link key={params.row.id} to={"/EmployeeLeave/" + params.row._id}>
+                <button className="bg-blue-600 hover:cursor-pointer text-white px-2 py-2 rounded-xl">
                   Leave Request
                 </button>
               </Link>
             </div>
             <div>
-              <button className="bg-green-600 text-white px-2 py-2 rounded-xl">
-                Mark Present
-              </button>
+              <Link
+                key={params.row._id}
+                to={"/EmployeeAttendence/" + params.row._id}
+              >
+                <button
+                  onClick={MarkPresent}
+                  className="bg-green-600 hover:cursor-pointer hover:transition hover:duration-500 hover:bg-green-700 text-white px-2 py-2 rounded-xl"
+                >
+                  Mark Present
+                </button>
+              </Link>
             </div>
           </div>
         );
@@ -87,19 +144,12 @@ const EmployeeAttendence = () => {
     },
   ];
 
-  // todo these are the values for these headers
-  // todo jo nam yaha key ma dena ha wohi name upr coloum ma b dena ha
-  const rows = [
-    { id: 1, img: "myimg", lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, img: "myimg", lastName: "Snow", firstName: "Jon", age: 35 },
-
-    { id: 3, img: "myimg", lastName: "Lannister", firstName: "Jaime", age: 45 },
-  ];
   return (
     <div className="mx-2 my-4 bg-white">
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
-          rows={rows}
+          getRowId={(row) => row._id}
+          rows={data}
           columns={columns}
           pageSize={5}
           disableRowSelectionOnClick

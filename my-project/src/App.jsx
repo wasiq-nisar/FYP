@@ -27,6 +27,7 @@ import UpdateManagerInfo from "./AdminPages/UpdateManagerInfo";
 import AdminDashboard from "./AdminPages/AdminDashboard";
 import ShowAllProducts from "./OrderManager/ShowAllProducts";
 import UpdateAndDeleteManager from "./AdminPages/UpdateAndDeleteManager";
+import AttendenceRecordPerMonth from "./HR Manager/AttendenceRecordPerMonth";
 //* to import the reducer function
 import { initialState, reducer } from "./reducer/userReducer";
 import Login from "./Login/Login";
@@ -35,6 +36,7 @@ const Routing = () => {
   return (
     <>
       <Routes>
+        <Route exact path="/" element={<Login />} />
         {/* first will be login */}
         {/* <Route path="/" element={<Home />} /> */}
         <Route exact path="/AdminDashboard" element={<AdminDashboard />} />
@@ -53,8 +55,12 @@ const Routing = () => {
         <Route exact path="/DailyActivities" element={<DailyActivities />} />
         <Route exact path="/AddAssest/" element={<AddAssest />} />
         <Route exact path="/UpdateAssests" element={<UpdateAssests />} />
-        <Route exact path="/UpdateManagerInfo/:_id" element={<UpdateManagerInfo />} />
-        
+        <Route
+          exact
+          path="/UpdateManagerInfo/:_id"
+          element={<UpdateManagerInfo />}
+        />
+
         <Route
           exact
           path="/UpdateAssestsInfo/:id"
@@ -72,16 +78,27 @@ const Routing = () => {
         {/* end of Inventory Manager */}
         {/* Start of Hr manager */}
         <Route exact path="/ExpenseManagment" element={<ExpenseManagment />} />
-        <Route exact path="/AddExpense" element={<AddExpense />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/AddExpense/:id" element={<AddExpense />} />
+
         <Route
           exact
           path="/EmployeeAttendence"
           element={<EmployeeAttendence />}
         />
+        <Route
+          exact
+          path="/EmployeeAttendence/:id"
+          element={<EmployeeAttendence />}
+        />
         <Route exact path="/EmployeeLeave/:id" element={<EmployeeLeave />} />
+
         <Route exact path="/PayrollManagment" element={<PayrollManagment />} />
-        <Route exact path="/UpdatePay" element={<UpdatePay />} />
+        <Route exact path="/UpdatePay/:id" element={<UpdatePay />} />
+        <Route
+          exact
+          path="/AttendenceRecordPerMonth"
+          element={<AttendenceRecordPerMonth />}
+        />
         {/* end of hr */}
         {/* start of order Manager */}
         <Route exact path="/ProductInfo" element={<ProductInfo />} />

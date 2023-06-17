@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const attendenceSchema = new mongoose.Schema(
+const expenseSchema = new mongoose.Schema(
   {
-    value: {
+    ename: {
       type: String,
       required: true,
     },
@@ -10,7 +10,7 @@ const attendenceSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "userSchema",
     },
-    description: {
+    edetail: {
       type: String,
       required: true,
     },
@@ -18,4 +18,4 @@ const attendenceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Attendence", attendenceSchema);
+module.exports = mongoose.model("Expense", expenseSchema);

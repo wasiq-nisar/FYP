@@ -79,49 +79,52 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {admindata.map((l) => (
-            <Link to={l.link}>
-            <div className="group">
-              <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
-                <h1
-                  key={l.id}
-                  className="text-xl px-1 font-semibold hover:text-white text-black"
-                >
-                  {l.name}
-                </h1>
-                <div className="w-full  text-black">
-                  <hr />
+            <NavLink to={l.link}>
+              <div className="group">
+                <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
+                  <h1
+                    key={l.id}
+                    className="text-xl px-1 font-semibold hover:text-white text-black"
+                  >
+                    {l.name}
+                  </h1>
+                  <div className="w-full  text-black">
+                    <hr />
+                  </div>
                 </div>
-              </div>
-              {l.submenu && (
-                <div className="hidden group-hover:block hover:block">
-                  {l.sublinks.map((sblinks) => (
-                    <div className="">
-                      <h1 className="px-4 text-lg font-semibold">
-                        {sblinks.title}
-                      </h1>
-                      <div className="w-full  text-black">
-                        <hr />
-                      </div>
+                {l.submenu && (
+                  <div className="hidden group-hover:block hover:block">
+                    {l.sublinks.map((sblinks) => (
                       <div className="">
-                        {sblinks.sublink.map((sblink) => (
-                          <div className="flex">
-                            <div>
-                              <ArrowRightAltIcon></ArrowRightAltIcon>
+                        <h1 className="px-4 text-lg font-semibold">
+                          {sblinks.title}
+                        </h1>
+                        <div className="w-full  text-black">
+                          <hr />
+                        </div>
+                        <div className="">
+                          {sblinks.sublink.map((sblink) => (
+                            <div className="flex">
+                              <div>
+                                <ArrowRightAltIcon></ArrowRightAltIcon>
+                              </div>
+                              <div>
+                                <h1
+                                  className="px-6 text-base "
+                                  key={sblink.sid}
+                                >
+                                  {sblink.name}
+                                </h1>
+                              </div>
                             </div>
-                            <div>
-                              <h1 className="px-6 text-base " key={sblink.sid}>
-                                {sblink.name}
-                              </h1>
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </NavLink>
           ))}
         </div>
       );
@@ -130,49 +133,52 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {admindata.map((l) => (
-            <Link to={l.link}>
-            <div className="group">
-              <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
-                <h1
-                  key={l.id}
-                  className="text-xl px-1 font-semibold hover:text-white text-black"
-                >
-                  {l.name}
-                </h1>
-                <div className="w-full  text-black">
-                  <hr />
+            <NavLink to={l.link}>
+              <div className="group">
+                <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
+                  <h1
+                    key={l.id}
+                    className="text-xl px-1 font-semibold hover:text-white text-black"
+                  >
+                    {l.name}
+                  </h1>
+                  <div className="w-full  text-black">
+                    <hr />
+                  </div>
                 </div>
-              </div>
-              {l.submenu && (
-                <div className="hidden group-hover:block hover:block">
-                  {l.sublinks.map((sblinks) => (
-                    <div className="">
-                      <h1 className="px-4 text-lg font-semibold">
-                        {sblinks.title}
-                      </h1>
-                      <div className="w-full  text-black">
-                        <hr />
-                      </div>
+                {l.submenu && (
+                  <div className="hidden group-hover:block hover:block">
+                    {l.sublinks.map((sblinks) => (
                       <div className="">
-                        {sblinks.sublink.map((sblink) => (
-                          <div className="flex">
-                            <div>
-                              <ArrowRightAltIcon></ArrowRightAltIcon>
+                        <h1 className="px-4 text-lg font-semibold">
+                          {sblinks.title}
+                        </h1>
+                        <div className="w-full  text-black">
+                          <hr />
+                        </div>
+                        <div className="">
+                          {sblinks.sublink.map((sblink) => (
+                            <div className="flex">
+                              <div>
+                                <ArrowRightAltIcon></ArrowRightAltIcon>
+                              </div>
+                              <div>
+                                <h1
+                                  className="px-6 text-base "
+                                  key={sblink.sid}
+                                >
+                                  {sblink.name}
+                                </h1>
+                              </div>
                             </div>
-                            <div>
-                              <h1 className="px-6 text-base " key={sblink.sid}>
-                                {sblink.name}
-                              </h1>
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </NavLink>
           ))}
         </div>
       );
@@ -181,47 +187,52 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {data.map((l) => (
-            <div className="group">
-              <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
-                <h1
-                  key={l.id}
-                  className="text-xl px-2 font-bold hover:text-white text-black"
-                >
-                  {l.name}
-                </h1>
-                <div className="w-full  text-black">
-                  <hr />
+            <NavLink to={l.link}>
+              <div className="group">
+                <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
+                  <h1
+                    key={l.id}
+                    className="text-xl px-2 font-bold hover:text-white text-black"
+                  >
+                    {l.name}
+                  </h1>
+                  <div className="w-full  text-black">
+                    <hr />
+                  </div>
                 </div>
-              </div>
-              {l.submenu && (
-                <div className="hidden group-hover:block hover:block">
-                  {l.sublinks.map((sblinks) => (
-                    <div className="">
-                      <h1 className="px-4 text-lg font-semibold">
-                        {sblinks.title}
-                      </h1>
-                      <div className="w-full  text-black">
-                        <hr />
-                      </div>
+                {l.submenu && (
+                  <div className="hidden group-hover:block hover:block">
+                    {l.sublinks.map((sblinks) => (
                       <div className="">
-                        {sblinks.sublink.map((sblink) => (
-                          <div className="flex">
-                            <div>
-                              <ArrowRightAltIcon></ArrowRightAltIcon>
+                        <h1 className="px-4 text-lg font-semibold">
+                          {sblinks.title}
+                        </h1>
+                        <div className="w-full  text-black">
+                          <hr />
+                        </div>
+                        <div className="">
+                          {sblinks.sublink.map((sblink) => (
+                            <div className="flex">
+                              <div>
+                                <ArrowRightAltIcon></ArrowRightAltIcon>
+                              </div>
+                              <div>
+                                <h1
+                                  className="px-6 text-base "
+                                  key={sblink.sid}
+                                >
+                                  {sblink.name}
+                                </h1>
+                              </div>
                             </div>
-                            <div>
-                              <h1 className="px-6 text-base " key={sblink.sid}>
-                                {sblink.name}
-                              </h1>
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </NavLink>
           ))}
         </div>
       );
@@ -230,47 +241,52 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {inventorydata.map((l) => (
-            <div className="group">
-              <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
-                <h1
-                  key={l.id}
-                  className="text-xl px-2 font-bold hover:text-white text-black"
-                >
-                  {l.name}
-                </h1>
-                <div className="w-full  text-black">
-                  <hr />
+            <NavLink to={l.link}>
+              <div className="group">
+                <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
+                  <h1
+                    key={l.id}
+                    className="text-xl px-2 font-bold hover:text-white text-black"
+                  >
+                    {l.name}
+                  </h1>
+                  <div className="w-full  text-black">
+                    <hr />
+                  </div>
                 </div>
-              </div>
-              {l.submenu && (
-                <div className="hidden group-hover:block hover:block">
-                  {l.sublinks.map((sblinks) => (
-                    <div className="">
-                      <h1 className="px-4 text-lg font-semibold">
-                        {sblinks.title}
-                      </h1>
-                      <div className="w-full  text-black">
-                        <hr />
-                      </div>
+                {l.submenu && (
+                  <div className="hidden group-hover:block hover:block">
+                    {l.sublinks.map((sblinks) => (
                       <div className="">
-                        {sblinks.sublink.map((sblink) => (
-                          <div className="flex">
-                            <div>
-                              <ArrowRightAltIcon></ArrowRightAltIcon>
+                        <h1 className="px-4 text-lg font-semibold">
+                          {sblinks.title}
+                        </h1>
+                        <div className="w-full  text-black">
+                          <hr />
+                        </div>
+                        <div className="">
+                          {sblinks.sublink.map((sblink) => (
+                            <div className="flex">
+                              <div>
+                                <ArrowRightAltIcon></ArrowRightAltIcon>
+                              </div>
+                              <div>
+                                <h1
+                                  className="px-6 text-base "
+                                  key={sblink.sid}
+                                >
+                                  {sblink.name}
+                                </h1>
+                              </div>
                             </div>
-                            <div>
-                              <h1 className="px-6 text-base " key={sblink.sid}>
-                                {sblink.name}
-                              </h1>
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </NavLink>
           ))}
         </div>
       );

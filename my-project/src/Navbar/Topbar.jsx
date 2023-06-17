@@ -3,6 +3,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LanguageIcon from "@mui/icons-material/Language";
 import Sidebar from "../Navbar/Sidebar";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 const Topbar = () => {
   const [clicked, isClicked] = useState(false);
@@ -16,9 +17,12 @@ const Topbar = () => {
           <NotificationsIcon></NotificationsIcon>
           <LanguageIcon></LanguageIcon>
           <SettingsIcon></SettingsIcon>
-          <h1 className="text-xl font-semibold bg-orange-600 rounded-xl text-white px-3 py-1">
-            Login
-          </h1>
+
+          <Link to="/">
+            <h1 className="text-xl hover:cursor-pointer font-semibold bg-slate-400 hover:transition hover:bg-slate-900 hover:text-stone-50 hover:duration-500 rounded-xl  px-3 py-1">
+              Login
+            </h1>
+          </Link>
           <div className="block lg:hidden" onClick={() => isClicked(!clicked)}>
             <i
               className={`${

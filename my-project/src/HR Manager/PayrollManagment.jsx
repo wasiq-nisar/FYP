@@ -1,70 +1,83 @@
-// todo is ma se user ki info aay gi sab ki
-// todo har user ki pay b hoti ha sath
-// todo wo pay ko hum ne add update karna ha
-
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
-import img from "../assets/mypic.jpg";
-const PayrollManagment = () => {
-  //todo is ma hum data to dosri file se export kar ke yaha lay gay
-  // todo idher hum ne sab data(row) rowData ma pass kar diya ha
-  // const [rowData, setRowData] = useState(rows);
 
-  // todo these are the heading tags of the table
-  const columns = [
-    { field: "id", headerName: "ID", width: 35 },
-    // todo renderCell se hum apni marzi ki output show kar sakty ha
+const PayrollManagment = () => {
+  const [data, setData] = useState([]);
+
+  const callAboutUrlFromBackend = async () => {
+    let res;
+    try {
+      res = await fetch("http://localhost:8000/api/users/", {
+        method: "GET",
+      });
+    } catch (e) {
+      console.log("rror", e);
+    }
+
+    if (res.status === 400) {
+      console.log("no credential found");
+      //navigate("/Login");
+      return;
+    }
+    //* if data is not found
+    if (res.status === 200);
     {
-      //* is se b datashow ho jay ga magar renderCell se data ko hum customize kar sakin gay
-      field: "img",
-      // todo this is the table header name
+      const data = await res.json();
+      //* is data ma sarraa user ka dataaa jay ga
+      setData(data);
+    }
+  };
+
+  useEffect(() => {
+    callAboutUrlFromBackend();
+  }, []);
+
+  const columns = [
+    { field: "_id", headerName: "ID", width: 135 },
+
+    {
+      field: "image",
+
       headerName: "Image",
       width: 60,
-      // todo idher hum image b add kar sakty ha our jo b data ho color wegrar b de sakty ha
+
       renderCell: (params) => {
         return (
           <div>
             <img
               className="w-12 h-8 rounded-full"
-              src={img}
-              alt={params.row.firstName}
+              src={
+                "http://localhost:8000/uploads/" +
+                params.row.image.split("/").at(-1)
+              }
             />
           </div>
         );
       },
     },
     {
-      //* is se b datashow ho jay ga magar renderCell se data ko hum customize kar sakin gay
-      field: "firstName",
-      // todo this is the table header name
-      headerName: "First name",
+      field: "name",
+      headerName: "Name",
       width: 130,
-      // todo idher hum image b add kar sakty ha our jo b data ho color wegrar b de sakty ha
-      renderCell: (params) => {
-        return <div>{params.row.firstName}</div>;
-      },
     },
-    { field: "lastName", headerName: "Last name", width: 130 },
+    { field: "phone", headerName: "phone", width: 130 },
+    { field: "cnic", headerName: "cnic", width: 130 },
+    { field: "address", headerName: "address", width: 130 },
     {
-      field: "age",
-      headerName: "Age",
+      field: "username",
+      headerName: "Username",
       type: "number",
       width: 90,
     },
     {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+      field: "type",
+      headerName: "User Type",
+      type: "number",
+      width: 90,
     },
-    // ! important
-    //* this is how we create the additional html items in table
-    // todo here we can edit and delete buttons
+
     {
       feild: "actions",
       headerName: "actions",
@@ -74,15 +87,11 @@ const PayrollManagment = () => {
           <div className="flex">
             <div>
               {/* todo is tarha hum url ma wo id send karin gay */}
-              <Link key={params.row.id} to={"/UpdateAssests/" + params.row.id}>
+              <Link key={params.row._id} to={"/UpdatePay/" + params.row._id}>
                 <button className="bg-yellow-300 text-black px-2 py-2 rounded-xl">
-                  Update
+                  Update Pay
                 </button>
               </Link>
-            </div>
-            <div className="text-red-500">
-              {" "}
-              <DeleteIcon></DeleteIcon>
             </div>
           </div>
         );
@@ -90,19 +99,12 @@ const PayrollManagment = () => {
     },
   ];
 
-  // todo these are the values for these headers
-  // todo jo nam yaha key ma dena ha wohi name upr coloum ma b dena ha
-  const rows = [
-    { id: 1, img: "myimg", lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, img: "myimg", lastName: "Snow", firstName: "Jon", age: 35 },
-
-    { id: 3, img: "myimg", lastName: "Lannister", firstName: "Jaime", age: 45 },
-  ];
   return (
     <div className="mx-2 my-4 bg-white">
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
-          rows={rows}
+          getRowId={(row) => row._id}
+          rows={data}
           columns={columns}
           pageSize={5}
           disableRowSelectionOnClick
