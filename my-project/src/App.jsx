@@ -53,8 +53,12 @@ const Routing = () => {
         <Route exact path="/DailyActivities" element={<DailyActivities />} />
         <Route exact path="/AddAssest/:id" element={<AddAssest />} />
         <Route exact path="/UpdateAssests" element={<UpdateAssests />} />
-        <Route exact path="/UpdateManagerInfo/:_id" element={<UpdateManagerInfo />} />
-        
+        <Route
+          exact
+          path="/UpdateManagerInfo/:_id"
+          element={<UpdateManagerInfo />}
+        />
+
         <Route
           exact
           path="/UpdateAssestsInfo/:id"
@@ -73,7 +77,7 @@ const Routing = () => {
         {/* Start of Hr manager */}
         <Route exact path="/ExpenseManagment" element={<ExpenseManagment />} />
         <Route exact path="/AddExpense" element={<AddExpense />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/" element={<Login />} />
         <Route
           exact
           path="/EmployeeAttendence"
