@@ -1,7 +1,7 @@
 import React from "react";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { userContext } from "../App";
 import { useState } from "react";
 import {
@@ -79,6 +79,7 @@ const Sidebar = () => {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
           {admindata.map((l) => (
+            <Link to={l.link}>
             <div className="group">
               <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                 <h1
@@ -120,6 +121,7 @@ const Sidebar = () => {
                 </div>
               )}
             </div>
+            </Link>
           ))}
         </div>
       );
@@ -127,12 +129,13 @@ const Sidebar = () => {
     if (state == "hrmanager") {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
-          {hrdata.map((l) => (
+          {admindata.map((l) => (
+            <Link to={l.link}>
             <div className="group">
-              <div className="py-2 px-2 hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
+              <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">
                 <h1
                   key={l.id}
-                  className="text-xl px-2 font-bold hover:text-white text-black"
+                  className="text-xl px-1 font-semibold hover:text-white text-black"
                 >
                   {l.name}
                 </h1>
@@ -169,6 +172,7 @@ const Sidebar = () => {
                 </div>
               )}
             </div>
+            </Link>
           ))}
         </div>
       );

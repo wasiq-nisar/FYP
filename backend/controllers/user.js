@@ -16,6 +16,19 @@ const getAllUsers = async(req, res) =>{
     }
 }
 
+const getUser = async(req, res) =>{
+    const {id: userID} = req.params;
+    try {
+        const user = await User.find({_id: userID});
+        if(!user){
+            res.status(404).json({msg: `No user with ID: ${userID}`})
+        }
+        return res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({msg: error.message});
+    }
+}
+
 const addUser = async(req, res) =>{
     const {name, email, phone, cnic, address, username, password, pay, type, image} = req.body;
     console.log(req.body)
@@ -78,7 +91,7 @@ const loginUser = async(req, res) => {
 
         // create a token
         const token = await createToken(user._id);
-        const type =user.type;
+        const type = user.type;
     
         res.status(200).json({email, type, token})
     } catch (error) {
@@ -118,6 +131,7 @@ const uploadUserImage = async(req, res) =>{
 
 module.exports = {
     getAllUsers,
+    getUser,
     addUser,
     deleteUser,
     updateUser,

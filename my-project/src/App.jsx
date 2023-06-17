@@ -51,8 +51,10 @@ const Routing = () => {
           element={<UpdateManagerInfo />}
         />
         <Route exact path="/DailyActivities" element={<DailyActivities />} />
-        <Route exact path="/AddAssest" element={<AddAssest />} />
+        <Route exact path="/AddAssest/:id" element={<AddAssest />} />
         <Route exact path="/UpdateAssests" element={<UpdateAssests />} />
+        <Route exact path="/UpdateManagerInfo/:_id" element={<UpdateManagerInfo />} />
+        
         <Route
           exact
           path="/UpdateAssestsInfo/:id"
