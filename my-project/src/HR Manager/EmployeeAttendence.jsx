@@ -2,11 +2,35 @@ import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import img from "../assets/mypic.jpg";
 const EmployeeAttendence = () => {
   const [data, setData] = useState([]);
+  const params = useParams();
+  const MarkPresent = async () => {
+    const id = params._id;
+    const present = "present";
+    // todo idher hum ne url change karna ha
+    const res = await fetch("http://localhost:8000/api/attendence/", {
+      method: "POST",
+
+      body: JSON.stringify({
+        id,
+        present,
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+    if (res.status === 422 || !data) {
+      window.alert("Error Attendence  failed");
+    } else {
+      window.alert("Attendence Marked succesfull");
+      navigate("/EmployeeAttendence/");
+    }
+  };
+
   const callAboutUrlFromBackend = async () => {
-    console.log("hello");
     let res;
     try {
       res = await fetch("http://localhost:8000/api/users/", {
@@ -89,16 +113,24 @@ const EmployeeAttendence = () => {
           <div className="flex gap-2">
             <div>
               {/* todo is tarha hum url ma wo id send karin gay */}
-              <Link key={params.row.id} to={"/EmployeeLeave/" + params.row.id}>
+              <Link key={params.row.id} to={"/EmployeeLeave/" + params.row._id}>
                 <button className="bg-blue-600 hover:cursor-pointer text-white px-2 py-2 rounded-xl">
                   Leave Request
                 </button>
               </Link>
             </div>
             <div>
-              <button className="bg-green-600 hover:cursor-pointer hover:transition hover:duration-500 hover:bg-green-700 text-white px-2 py-2 rounded-xl">
-                Mark Present
-              </button>
+              <Link
+                key={params.row.id}
+                to={"/EmployeeAttendence/" + params.row._id}
+              >
+                <button
+                  onClick={MarkPresent}
+                  className="bg-green-600 hover:cursor-pointer hover:transition hover:duration-500 hover:bg-green-700 text-white px-2 py-2 rounded-xl"
+                >
+                  Mark Present
+                </button>
+              </Link>
             </div>
           </div>
         );

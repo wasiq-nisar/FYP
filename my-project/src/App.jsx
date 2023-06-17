@@ -85,6 +85,11 @@ const Routing = () => {
           path="/EmployeeAttendence"
           element={<EmployeeAttendence />}
         />
+        <Route
+          exact
+          path="/EmployeeAttendence/:id"
+          element={<EmployeeAttendence />}
+        />
         <Route exact path="/EmployeeLeave/:id" element={<EmployeeLeave />} />
 
         <Route exact path="/PayrollManagment" element={<PayrollManagment />} />
