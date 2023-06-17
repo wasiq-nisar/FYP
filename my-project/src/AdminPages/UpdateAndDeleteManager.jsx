@@ -39,6 +39,14 @@ const UpdateAndDeleteManager = () => {
   useEffect(() => {
     callAboutUrlFromBackend();  
   },[]);
+  
+  const handleDelete = async() =>{
+    const response =  await fetch('http://localhost:8000/api/users/'+id, {
+      method: 'DELETE'
+    })
+    const json = await response.json();
+    console.log(json);
+  }
 
   const columns = [
     { field: "_id", headerName: "ID", width: 135 },
@@ -98,10 +106,12 @@ const UpdateAndDeleteManager = () => {
                 </button>
               </Link>
             </div>
-            <div className="text-red-500">
-              {" "}
-              <DeleteIcon></DeleteIcon>
-            </div>
+            <Link key={params.row.id} to={"/UpdateManagerInfo/" + params.row._id}>
+              <div className="text-red-500 text-2xl font-bold hover:cursor-pointer" onClick={handleDelete}>
+                {" "}
+                <DeleteIcon></DeleteIcon>
+              </div>
+            </Link>
           </div>
         );
       },
