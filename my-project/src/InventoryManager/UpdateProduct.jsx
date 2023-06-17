@@ -3,7 +3,7 @@ import { categories } from "../assets/data";
 const UpdateProduct = () => {
   const [data, setData] = useState(categories);
   return (
-    <div className="w-full py-2 grid h-[350px] grid-cols-1 lg:grid-cols-3 lg:gap-2 ">
+    <div className="w-full py-2 grid h-[350px] overflow-x-hidden grid-cols-1 lg:grid-cols-3 lg:gap-2 ">
       {data.map((cate) => (
         <div className="flex-col group">
           <div className="px-2 pb-2  bg-slate-200">
