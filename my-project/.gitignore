@@ -26,3 +26,4 @@ dist-ssr
 npm add @mui/x-data-grid
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/icons-material
+
