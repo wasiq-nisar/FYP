@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     email: {
         type: String,
@@ -18,7 +17,21 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-
+    cnic: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    address:{
+        type: String,
+        required: true,
+        unique: true
+    },
+    username:{
+        type: String,
+        required: true,
+        unique: true
+    },
     password: {
         type: String,
         required: true,
@@ -30,12 +43,16 @@ const userSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true
+    },
+    image:{
+        type: String,
+        required: true
     }
 }, {timestamps: true});
 
-userSchema.statics.createManager = async function(name, email, phone, password, pay, type){
+userSchema.statics.createManager = async function(name, email, phone, cnic, address, username, password, pay, type, image){
     console.log('asdasd');
-    console.log(name, email, phone, password, pay, type);
+    console.log(name, email, phone, cnic, address, username, password, pay, type, image);
     //Validation
     if(!email || !password){
         throw Error('All Fields must be filled');
@@ -56,7 +73,7 @@ userSchema.statics.createManager = async function(name, email, phone, password, 
     const hash = await bcrypt.hash(password, salt)
 
     console.log('start');
-    const user = await this.create({name, email, phone, password: hash, pay, type})
+    const user = await this.create({name, email, phone, cnic, address, username, password: hash, pay, type, image})
     console.log('end');
 
     return user

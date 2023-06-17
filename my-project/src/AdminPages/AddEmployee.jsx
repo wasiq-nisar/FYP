@@ -1,9 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
+import axios from "axios";
 
 const AddEmployee = () => {
+
+  const [employee, setEmployee] = useState({
+    name:"",
+    email:"",
+    phone:"",
+    cnic:"",
+    address:"",
+    username:"",
+    password:"",
+    image:"",
+    pay:"",
+    type:"Employee"
+  })
+
+  const [error, setError] = useState(null);
+  const [image, setImage] = useState({selectedFile: null});
+
+  const handlechange = (e) =>{
+    const name = e.target.name;
+    const value = e.target.value;
+    setEmployee({...employee, [name]: value});
+  }
+
+  const handleImgChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setEmployee({...employee, [name]: value})
+
+    const file = e.target.files[0];
+    setImage({selectedFile: file});
+  }
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+    
+    try {
+      const formData = new FormData();
+      console.log(employee);
+      const res = await axios.post('http://localhost:8000/api/users/', employee);
+      console.log(res);
+      formData.append("image", image.selectedFile, `${res.data._id}.jpg`);
+      console.log('after 1st');
+      console.log(image);
+      const res2 =  await axios.post('http://localhost:8000/api/users/uploads', formData);
+      console.log('after 2nd');
+
+    } catch (error) {
+      console.log(error);
+      if(error.response.data){
+        setError(error.response.data.msg);
+      }
+      else{
+        setError(null);
+      }
+    }
+    
+  }
+
+
+
   return (
     <div className="w-full ">
+    <form onSubmit={handleSubmit}>
       <div className="bg-white mx-4 my-5 px-4 py-4 rounded-lg shadow-white">
         <h1 className="text-xl  flex justify-center font-bold">Add Manager</h1>
         <div className="flex w-full gap-4 pb-2">
@@ -15,17 +78,23 @@ const AddEmployee = () => {
               <input
                 type="text"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="name"
+                value={employee.name}
+                onChange={handlechange}
               />
             </div>
           </div>
           <div className="w-1/2 ">
             <div>
-              <label className="font-bold">Last Name</label>
+              <label className="font-bold">Pay</label>
             </div>
             <div>
               <input
-                type="text"
+                type="number"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="pay"
+                value={employee.pay}
+                onChange={handlechange}
               />
             </div>
           </div>
@@ -39,6 +108,9 @@ const AddEmployee = () => {
             <input
               type="text"
               className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+              name="email"
+              value={employee.email}
+              onChange={handlechange}
             />
           </div>
         </div>
@@ -52,6 +124,9 @@ const AddEmployee = () => {
               <input
                 type="text"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="phone"
+                value={employee.phone}
+                onChange={handlechange}
               />
             </div>
           </div>
@@ -63,6 +138,9 @@ const AddEmployee = () => {
               <input
                 type="text"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="cnic"
+                value={employee.cnic}
+                onChange={handlechange}
               />
             </div>
           </div>
@@ -76,6 +154,9 @@ const AddEmployee = () => {
             <input
               type="text"
               className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+              name="address"
+              value={employee.address}
+              onChange={handlechange}
             />
           </div>
         </div>
@@ -89,6 +170,9 @@ const AddEmployee = () => {
               <input
                 type="text"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="username"
+                value={employee.username}
+                onChange={handlechange}
               />
             </div>
           </div>
@@ -100,6 +184,9 @@ const AddEmployee = () => {
               <input
                 type="text"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="password"
+                value={employee.password}
+                onChange={handlechange}
               />
             </div>
           </div>
@@ -113,6 +200,8 @@ const AddEmployee = () => {
               <input
                 type="file"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="image"
+                onChange={handleImgChange}
               />
             </div>
           </div>
@@ -123,8 +212,11 @@ const AddEmployee = () => {
             Register
           </button>
         </div>
+        {error && <div className="error">{error}</div>}
       </div>
+    </form>
     </div>
+    
   );
 };
 

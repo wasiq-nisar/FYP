@@ -1,6 +1,8 @@
 import React from "react";
 import Slider from "@mui/material/Slider";
 import { useState } from "react";
+import axios from 'axios';
+import { Alert } from "@mui/material";
 
 const AddManger = () => {
 
@@ -10,14 +12,15 @@ const AddManger = () => {
     phone:"",
     cnic:"",
     address:"",
-    userName:"",
+    username:"",
     password:"",
-    img:"",
+    image:"",
     pay:"",
     type:""
   })
 
   const [error, setError] = useState(null);
+  const [image, setImage] = useState({selectedFile: null});
 
   const handlechange = (e) =>{
     const name = e.target.name;
@@ -25,26 +28,41 @@ const AddManger = () => {
     setManager({...manager, [name]: value});
   }
 
+  const handleImgChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setManager({...manager, [name]: value})
+
+    const file = e.target.files[0];
+    setImage({selectedFile: file});
+  }
+
   const handleSubmit = async (e) =>{
     e.preventDefault()
-
-    console.log(manager);
-
-    const response = await fetch('http://localhost:8000/api/users', {
-      method:'POST',
-      body: JSON.stringify(manager),
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
     
-    const json = await response.json()
-    if (!response.ok) {
-      setError(json.error);
+    try {
+      const formData = new FormData();
+      console.log(manager);
+      const res = await axios.post('http://localhost:8000/api/users/', manager);
+      console.log(res);
+      formData.append("image", image.selectedFile, `${res.data._id}.jpg`);
+      console.log('after 1st');
+      console.log(image);
+      const res2 =  await axios.post('http://localhost:8000/api/users/uploads', formData);
+      console.log('after 2nd');
+
+    } catch (error) {
+      console.log(error);
+      console.log(error.response.data);
+      if(error.response.data){
+        setError(error.response.data.msg);
+      }
+      else{
+        setError(null);
+      }
     }
-    if (response.ok) {
-      setError(null);
-    }
+    
   }
 
   return (
@@ -153,8 +171,8 @@ const AddManger = () => {
               <input
                 type="text"
                 className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
-                name="userName"
-                value={manager.userName}
+                name="username"
+                value={manager.username}
                 onChange={handlechange}
               />
             </div>
@@ -189,7 +207,19 @@ const AddManger = () => {
                 onChange={handlechange}
               />
             </div>
+            <div>
+              <label className="font-bold">IMG</label>
+            </div>
+            <div>
+              <input
+                type="file"
+                className="border border-black rounded-lg w-full pl-4 font-bold text-xl"
+                name="image"
+                onChange={handleImgChange}
+              /> 
+            </div>
           </div>
+          
         </div>
         {/* 1 button for register Add Manager */}
         <div className="flex justify-center pb-2">
@@ -197,6 +227,7 @@ const AddManger = () => {
             Register
           </button>
         </div>
+        {error && <div className="error">{error}</div>}
       </div>
       </form>
     </div>
