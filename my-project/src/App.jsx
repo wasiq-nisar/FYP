@@ -103,7 +103,7 @@ const Routing = () => {
         />
         {/* end of hr */}
         {/* start of order Manager */}
-        <Route exact path="/ProductInfo" element={<ProductInfo />} />
+        <Route exact path="/ProductInfo/:id" element={<ProductInfo />} />
         <Route exact path="/CartAndOrder" element={<CartAndOrder />} />
         <Route exact path="/ShowAllProducts" element={<ShowAllProducts />} />
         {/* end of Order Admin */}
