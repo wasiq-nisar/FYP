@@ -51,6 +51,11 @@ const Routing = () => {
         />
         <Route
           exact
+          path="/UpdateAndDeleteManager/:id"
+          element={<UpdateAndDeleteManager />}
+        />
+        <Route
+          exact
           path="/UpdateManagerInfo"
           element={<UpdateManagerInfo />}
         />
