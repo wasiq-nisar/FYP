@@ -172,7 +172,9 @@ const AddProduct = () => {
         </div>
       </div>
       {/* end of div */}
+      {/* sizes div */}
 
+      {/* end fo size div */}
       <div className="lg:flex pb-1 lg:justify-between">
         <div className="px-2 item1 flex-col">
           <div>
@@ -185,7 +187,34 @@ const AddProduct = () => {
             />
           </div>
         </div>
-
+        <div className="px-2 item1 flex-col">
+          <div>
+            <label className="text-white">Sizes</label>
+          </div>
+          <div className="w-full">
+            <select
+              className="border-b-4 w-full rounded-xl px-2 border-gray-800 text-white bg-gray-600 focus:outline-none focus:border-b-gray-800"
+              name="colors"
+              multiple
+            >
+              <option value="S">Small</option>
+              <option value="M">Medium</option>
+              <option value="L">large</option>
+              <option value="XL">Extra Large</option>
+              <option value="XXL">XXL</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+            </select>
+          </div>
+        </div>
         <div className="px-2 item1 flex-col">
           <div>
             <label className="text-white">Add Image</label>
