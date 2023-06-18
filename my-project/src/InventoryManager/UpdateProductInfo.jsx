@@ -127,10 +127,20 @@ const UpdateProductInfo = () => {
             <label className="text-white">Color</label>
           </div>
           <div className="w-full">
-            <input
+            <select
               className="border-b-4 w-full rounded-xl px-2 border-gray-800 text-white bg-gray-600 focus:outline-none focus:border-b-gray-800"
-              type="text"
-            />
+              name="colors"
+              multiple
+            >
+              <option value="#FF0000">Red</option>
+              <option value="#000000">Black</option>
+              <option value="#A52A2A">Brown</option>
+              <option value="#ffa500">Orange</option>
+              <option value="#008000">Green</option>
+              <option value="#0000FF">Blue</option>
+              <option value="#0000FF">Pink</option>
+              <option value="#0000FF">Purple</option>
+            </select>
           </div>
         </div>
         {/* ---------------- */}
