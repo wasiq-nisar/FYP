@@ -74,7 +74,7 @@ const Routing = () => {
         <Route exact path="/UpdateProduct" element={<UpdateProduct />} />
         <Route
           exact
-          path="/UpdateProductInfo"
+          path="/UpdateProductInfo/:id"
           element={<UpdateProductInfo />}
         />
         {/* end of Inventory Manager */}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { categories } from "../assets/data";
+import { Link } from "react-router-dom";
 const UpdateProduct = () => {
   const [data, setData] = useState(categories);
   return (
@@ -32,9 +33,11 @@ const UpdateProduct = () => {
               <div className="color1 bg-blue-800 rounded-full w-6 h-6"></div>
             </div>
             <div className="flex justify-center">
-              <button className="px-2 py-2 bg-indigo-500 shadow-lg shadow-indigo-500/50 text-white hover:text-lg flex justify-center rounded-2xl">
-                More Info
-              </button>
+              <Link to={"/UpdateProductInfo/" + cate.id}>
+                <button className="px-2 py-2 bg-indigo-500 shadow-lg shadow-indigo-500/50 text-white hover:text-lg flex justify-center rounded-2xl">
+                  Update Product
+                </button>
+              </Link>
             </div>
           </div>
         </div>
