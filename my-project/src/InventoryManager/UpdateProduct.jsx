@@ -17,13 +17,14 @@ const UpdateProduct = () => {
 
           <div className="hidden group-hover:opacity-100 group-hover:block group-hover:delay-300 group-hover:transition-all	group-hover:duration-300 group-hover:ease-in-out group-hover:translate-y-[-170%]">
             <div>
-              <h1 className="flex justify-center text-white text-2xl">
+              <h1 className="flex justify-center text-white text-xl">
                 Product Name
               </h1>
-              <h1 className="flex justify-center text-white text-2xl">
-                Company
+              <h1 className="flex justify-center text-white text-xl">
+                Company Name
               </h1>
-              <h1 className="flex justify-center text-white text-2xl">Units</h1>
+              <h1 className="flex justify-center text-white text-xl">Units</h1>
+              <h1 className="flex justify-center text-white text-xl">Price</h1>
             </div>
             <div className="flex justify-center text-white text-2xl gap-2 py-2">
               <div className="color1 bg-red-600 rounded-full w-6 h-6"></div>
