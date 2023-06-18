@@ -28,6 +28,8 @@ import AdminDashboard from "./AdminPages/AdminDashboard";
 import ShowAllProducts from "./OrderManager/ShowAllProducts";
 import UpdateAndDeleteManager from "./AdminPages/UpdateAndDeleteManager";
 import AttendenceRecordPerMonth from "./HR Manager/AttendenceRecordPerMonth";
+import Logout from "./Logout";
+//import Error from "./Error";
 //* to import the reducer function
 import { initialState, reducer } from "./reducer/userReducer";
 import Login from "./Login/Login";
@@ -105,7 +107,7 @@ const Routing = () => {
         <Route exact path="/CartAndOrder" element={<CartAndOrder />} />
         <Route exact path="/ShowAllProducts" element={<ShowAllProducts />} />
         {/* end of Order Admin */}
-        {/* <Route exact path="/Logout" element={<Logout />} /> */}
+        <Route exact path="/Logout" element={<Logout />} />
         {/* <Route path="*" element={<Error />} /> */}
       </Routes>
 

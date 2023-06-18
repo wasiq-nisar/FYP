@@ -3,8 +3,9 @@ import Slider from "@mui/material/Slider";
 import { useState } from "react";
 import axios from "axios";
 import { Alert } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 const AddManger = () => {
+  const navigate = useNavigate();
   const [manager, setManager] = useState({
     name: "",
     email: "",
@@ -42,17 +43,16 @@ const AddManger = () => {
 
     try {
       const formData = new FormData();
-      console.log(manager);
+
       const res = await axios.post("http://localhost:8000/api/users/", manager);
-      console.log(res);
+
       formData.append("image", image.selectedFile, `${res.data._id}.jpg`);
-      console.log("after 1st");
-      console.log(image);
+
       const res2 = await axios.post(
         "http://localhost:8000/api/users/uploads",
         formData
       );
-      console.log("after 2nd");
+      navigate("/AdminDashboard");
     } catch (error) {
       console.log(error);
       console.log(error.response.data);
@@ -91,13 +91,17 @@ const AddManger = () => {
                 <label className="font-bold text-blue-800">Type</label>
               </div>
               <div>
-                <input
-                  type="text"
+                <select
                   className="border border-black border-none bg-gray-300 w-full pl-4 font-bold text-xl"
                   name="type"
                   value={manager.type}
                   onChange={handlechange}
-                />
+                >
+                  <option value="inventorymanager">Inventory Manager</option>
+                  <option value="orderadmin">Order Admin</option>
+                  <option value="hrmanager">Hr Manager</option>
+                  <option value="admin">Admin</option>
+                </select>
               </div>
             </div>
           </div>

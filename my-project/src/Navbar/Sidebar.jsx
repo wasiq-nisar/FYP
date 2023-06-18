@@ -25,7 +25,6 @@ const Sidebar = () => {
 
   const { state, dispatch } = useContext(userContext);
   const UserLoggedIN = () => {
-    console.log("In Side Bar:" + state);
     if (state === "" || state === null) {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
@@ -132,7 +131,7 @@ const Sidebar = () => {
     if (state == "hrmanager") {
       return (
         <div className="dashboard py-2 px-2 flex-col  text-[11px]">
-          {admindata.map((l) => (
+          {HRSideBarLinks.map((l) => (
             <NavLink to={l.link}>
               <div className="group">
                 <div className="py-2  hover:transition hover:ease-in-out  hover:bg-teal-500 hover:rounded-md hover:text-white">

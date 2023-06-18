@@ -33,8 +33,16 @@ const Login = () => {
       setIsLoading(false);
       const userType = json.type;
 
-      dispatch({ type: "admin", payload: userType });
-      navigate("/AdminDashboard");
+      dispatch({ type: userType, payload: userType });
+      if (userType === "hrmanager") {
+        navigate("/EmployeeAttendence");
+      } else if (userType === "admin") {
+        navigate("/AdminDashboard");
+      } else if (userType === "orderadmin") {
+        navigate("/ProductInfo");
+      } else if (userType === "inventorymanager") {
+        navigate("/AddProduct");
+      }
     }
   };
 
