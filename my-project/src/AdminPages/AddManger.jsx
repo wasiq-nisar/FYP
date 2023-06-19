@@ -17,7 +17,7 @@ const AddManger = () => {
     password: "",
     image: "",
     pay: "",
-    type: "",
+    type: "inventorymanager",
   });
 
   const [error, setError] = useState(null);
@@ -45,7 +45,9 @@ const AddManger = () => {
     try {
       const formData = new FormData();
 
+      console.log(manager);
       const res = await axios.post("http://localhost:8000/api/users/", manager);
+      
 
       formData.append("image", image.selectedFile, `${res.data._id}.jpg`);
 

@@ -2,6 +2,7 @@
 // todo 2 forms bnaaa lety ha jis ma data add our remove kar sakin gay
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 
@@ -41,9 +42,9 @@ const AssestManagment = () => {
     }   
   }
 
-  const handleUpdate = async(req, res) =>{
+  const handleUpdate = async(e) =>{
     e.preventDefault();
-    try {
+      try {
       const res = await axios.patch('http://localhost:8000/api/assets/', asset);
     } catch (error) {
       console.log(err.response);
@@ -62,7 +63,6 @@ const AssestManagment = () => {
       </div>
       <div className="flex justify-center pb-4">
         <input
-          required
           type="text"
           className="border  border-black rounded-lg w-3/4 pl-4 font-bold text-xl"
           name='name'
@@ -77,7 +77,6 @@ const AssestManagment = () => {
             <label className="font-semibold px-3">Description</label>
             <div className="px-3">
               <input
-                required
                 type="text"
                 className="border  border-black rounded-lg  pl-4 font-bold text-xl"
                 name='description'
@@ -93,7 +92,6 @@ const AssestManagment = () => {
             <label className="font-semibold">Price</label>
             <div>
               <input
-                required
                 type="number"
                 className="border  border-black rounded-lg  pl-4 font-bold text-xl"
                 name='price'
@@ -108,7 +106,6 @@ const AssestManagment = () => {
             <label className="font-semibold">Date of Purchase</label>
             <div>
               <input
-                required
                 type="date"
                 className="border  border-black rounded-lg  pl-4 font-bold text-xl"
                 name='dateofpurchase'
@@ -121,16 +118,22 @@ const AssestManagment = () => {
       </div>
 
       {/* Button to add ,update delete assest */}
-      <div className="flex gap-10 justify-center py-6">
+      <div className="flex  py-6">
+        <div className="w-full">
         <button type="submit" onClick={handleSubmit} className="bg-green-600 text-white rounded-xl px-2 py-2">
           Add Assest
         </button>
-        <button type="submit" onClick={handleUpdate} className="bg-yellow-400 text-white rounded-xl px-2 py-2">
-          Update Assest
-        </button>
-        <button className="bg-red-500 text-white rounded-xl px-2 py-2">
-          Delete Assest
-        </button>
+        </div>
+        
+        <div className="w-full">
+        <Link to='/UpdateAssests'>  
+        <button className="bg-yellow-400 text-white rounded-xl px-2 py-2">
+            Update Assest
+          </button>
+          </Link>
+        </div>
+       
+        
       </div>
       {error && <div className="error">{error}</div>}
     </form>
