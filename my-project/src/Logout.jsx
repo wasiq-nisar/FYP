@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { userContext } from "../App";
+import { userContext } from "./App";
 
 const Logout = () => {
   const { state, dispatch } = useContext(userContext);
@@ -15,10 +15,10 @@ const Logout = () => {
       },
       credentials: "include",
     });
-    dispatch({ type: "user", payload: false });
+    dispatch({ type: "user", payload: "" });
     //todo api called and we called the login page to frontend
     console.log("logout button pressed");
-    navigate("/Login");
+    navigate("/");
     return;
   };
 

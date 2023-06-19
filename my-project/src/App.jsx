@@ -28,6 +28,8 @@ import AdminDashboard from "./AdminPages/AdminDashboard";
 import ShowAllProducts from "./OrderManager/ShowAllProducts";
 import UpdateAndDeleteManager from "./AdminPages/UpdateAndDeleteManager";
 import AttendenceRecordPerMonth from "./HR Manager/AttendenceRecordPerMonth";
+import Logout from "./Logout";
+//import Error from "./Error";
 //* to import the reducer function
 import { initialState, reducer } from "./reducer/userReducer";
 import Login from "./Login/Login";
@@ -45,6 +47,11 @@ const Routing = () => {
         <Route
           exact
           path="/UpdateAndDeleteManager"
+          element={<UpdateAndDeleteManager />}
+        />
+        <Route
+          exact
+          path="/UpdateAndDeleteManager/:id"
           element={<UpdateAndDeleteManager />}
         />
         <Route
@@ -72,7 +79,7 @@ const Routing = () => {
         <Route exact path="/UpdateProduct" element={<UpdateProduct />} />
         <Route
           exact
-          path="/UpdateProductInfo"
+          path="/UpdateProductInfo/:id"
           element={<UpdateProductInfo />}
         />
         {/* end of Inventory Manager */}
@@ -101,11 +108,11 @@ const Routing = () => {
         />
         {/* end of hr */}
         {/* start of order Manager */}
-        <Route exact path="/ProductInfo" element={<ProductInfo />} />
+        <Route exact path="/ProductInfo/:id" element={<ProductInfo />} />
         <Route exact path="/CartAndOrder" element={<CartAndOrder />} />
         <Route exact path="/ShowAllProducts" element={<ShowAllProducts />} />
         {/* end of Order Admin */}
-        {/* <Route exact path="/Logout" element={<Logout />} /> */}
+        <Route exact path="/Logout" element={<Logout />} />
         {/* <Route path="*" element={<Error />} /> */}
       </Routes>
 

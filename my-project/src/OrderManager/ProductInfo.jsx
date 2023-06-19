@@ -23,11 +23,11 @@ const ProductInfo = () => {
           <div>
             <h1 className="text-violet-700">PKR- 1555</h1>
           </div>
-          <div className="flex gap-2">
-            <div className="flex border h-8 border-black rounded-2xl">
-              <h2 className="font-bold text-xl">-</h2>
-              <div className="w-12 h-3 flex justify-center">1</div>
-              <h2 className="font-bold text-xl">+</h2>
+          <div className="flex-col lg:flex gap-2">
+            <div className="flex  h-8">
+              <h2 className="font-bold text-xl text-red-700">-</h2>
+              <div className="w-12 h-3 flex justify-center font-bold">1</div>
+              <h2 className="font-bold text-xl text-green-800">+</h2>
             </div>
             <div>
               <button className="px-2 py-2 rounded-2xl bg-green-500 text-white hover:bg-slate-950">
@@ -35,8 +35,8 @@ const ProductInfo = () => {
               </button>
             </div>
           </div>
-          <div className="px-2 py-2 rounded-2xl bg-black hover:text-xl text-white hover:bg-slate-950">
-            <button>Order Now</button>
+          <div className=" flex justify-center px-2 my-3  py-2 rounded-2xl bg-black hover:text-xl text-white hover:bg-slate-950">
+            <button className="flex justify-center">Order Now</button>
           </div>
         </div>
       </div>

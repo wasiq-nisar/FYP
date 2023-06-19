@@ -78,11 +78,12 @@ const addUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { id: userID } = req.params;
+   const { id } = req.params;
+  
   try {
-    const user = await User.findOneAndDelete({ _id: userID });
+    const user = await User.findOneAndDelete({ _id: id });
     if (!user) {
-      res.status(404).json({ msg: `No user with ID: ${userID}` });
+      res.status(404).json({ msg: `No user with ID: ${id}` });
     }
     return res.status(200).json(user);
   } catch (error) {
@@ -112,7 +113,6 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await User.login(email, password);
-    console.log("asdf");
 
     // create a token
     const token = await createToken(user._id);
@@ -129,7 +129,7 @@ const uploadUserImage = async (req, res) => {
   if (!req.files) {
     throw Error("No File Uploaded");
   }
-  console.log(req.files);
+
   const productImage = req.files.image;
   if (!productImage.mimetype.startsWith("image")) {
     throw Error("Please Upload Image");

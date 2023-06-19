@@ -13,6 +13,12 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  sizes: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   manufacturingdate: {
     type: Date,
   },
@@ -59,4 +65,3 @@ const productSchema = new mongoose.Schema({
 });
 // todo first one is the table name and secondOne is the schema
 module.exports = mongoose.model("Product", productSchema);
-
