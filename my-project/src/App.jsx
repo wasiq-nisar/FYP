@@ -44,6 +44,7 @@ const Routing = () => {
         <Route exact path="/AdminDashboard" element={<AdminDashboard />} />
         <Route exact path="/AddManger" element={<AddManger />} />
         <Route exact path="/AddEmployee" element={<AddEmployee />} />
+        <Route exact path="/showProducts" element={<ShowAllProducts />} /> 
         <Route
           exact
           path="/UpdateAndDeleteManager"

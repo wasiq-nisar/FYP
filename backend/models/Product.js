@@ -13,12 +13,6 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  sizes: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
   manufacturingdate: {
     type: Date,
   },
@@ -30,12 +24,10 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  category: [
-    {
+  category:{
       type: String,
       required: true,
-    },
-  ],
+  },
   colorQuantity: [
     {
       // todo this is for the color
@@ -54,7 +46,7 @@ const productSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  manufacturingLoc: {
+  manufacturingLocation: {
     type: String,
     required: true,
   },
@@ -62,6 +54,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true
+  }
 });
 // todo first one is the table name and secondOne is the schema
 module.exports = mongoose.model("Product", productSchema);
