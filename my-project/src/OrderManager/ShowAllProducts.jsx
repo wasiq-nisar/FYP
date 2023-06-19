@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { categories } from "../assets/data";
 import { Link } from "react-router-dom";
 const ShowAllProducts = () => {
   const [data, setData] = useState(categories);
+
+  useEffect(()=>{
+    
+  }, [])
+
   return (
     <div className="w-full py-2 grid h-[350px] grid-cols-1 lg:grid-cols-3 lg:gap-2 ">
       {data.map((cate) => (

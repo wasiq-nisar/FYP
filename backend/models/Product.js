@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-  companyname: {
+  manufacturername: {
     type: String,
     required: true,
   },
@@ -25,27 +25,17 @@ const productSchema = new mongoose.Schema({
     default: 0,
   },
   category:{
-      type: String,
-      required: true,
+    type: String,
+    required: true,
   },
-  colorQuantity: [
-    {
-      // todo this is for the color
-      type: String,
-      required: true,
-    },
-    {
-      //todo this is for the quantity
-      type: Number,
-      required: true,
-    },
-    {
-      // todo this is for the totalQuantity
-      // * aaj tak kitny unit aay apny pass
-      type: Number,
-      required: true,
-    },
-  ],
+  subcategory: {
+    type: String
+  },
+  quantity:{
+    type: Number,
+    required: true,
+    min: 1
+  },
   manufacturingLocation: {
     type: String,
     required: true,

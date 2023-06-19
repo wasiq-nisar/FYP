@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const path = require('path');
 
 const getAllProducts = async(req, res) =>{
     try {
@@ -11,7 +12,27 @@ const getAllProducts = async(req, res) =>{
 }
 
 const addProduct = async(req, res) =>{
-    const {companyname, productname, price, manufacturingdate, expirationdate, discount, category, colorQuantity, manufacturingLocation, description, image} = req.body;
+    console.log(req.body);
+    const {manufacturername, productname, price, manufacturingdate, expirationdate, discount, category, subcategory, quantity, manufacturingLocation, description, image} = req.body;
+    
+    if(!manufacturername || !productname || !price || !manufacturingdate || !category || !manufacturingLocation || !quantity || !description || !image){
+        throw Error(`* Fields are required!!`);
+    }
+    if(manufacturingdate > Date.now()){
+        throw Error('Manufacturing Date must be Less than System Date');
+    }
+    if(expirationdate && expirationdate < Date.now()){
+        throw Error('Expiration Date must be Greater than System Date');
+    }
+    if(discount && discount < 0 || discount > 100){
+        throw Error('Discount must be between 0 and 100');
+    }
+    if(price < 0){
+        throw Error('Price must be Greater than or equal to Zero');
+    }
+    if(quantity <= 0){
+        throw Error('Quantity must be greater than 0');
+    }
 
     //Get img name
     const newImage = image.split("//").at(-1);
@@ -19,14 +40,15 @@ const addProduct = async(req, res) =>{
     //Get img extension
     const ext = newImage.split(".").at(-1);
     try {
-        const product = await Product.create(companyname, productname, price, manufacturingdate, expirationdate, discount, category, colorQuantity, manufacturingLocation, description, image)
-        const imagePath = `/public/uploads/${user._id}.${ext}`;
-        const finalProduct = await Product.findOneAndUpdate(
-            { _id: product._id },
+        console.log('start');
+        const product = await Product.create({manufacturername, productname, price, manufacturingdate, expirationdate, discount, subcategory, category, quantity, manufacturingLocation, description, image})
+        console.log('end');
+        const imagePath = `/public/products/${product._id}.${ext}`;
+        const finalProduct = await Product.findOneAndUpdate({ _id: product._id },
             { image: imagePath },
             {
-            new: true,
-            runValidators: true,
+                new: true,
+                runValidators: true,
             }
         );
         res.status(200).json(finalProduct);
@@ -81,11 +103,11 @@ const uploadProductImage = async (req, res) => {
     }
     const imagePath = path.join(
       __dirname,
-      "../public/uploads/products" + `${productImage.name}`
+      "../public/products/" + `${productImage.name}`
     );
     await productImage.mv(imagePath);
   
-    res.status(200).json({ image: `/uploads/products/${productImage.name}` });
+    res.status(200).json({ image: `/products/${productImage.name}` });
     // } catch (error) {
     //     res.status(400).json({error: error.message});
     // }
