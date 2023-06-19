@@ -3,6 +3,7 @@ import Slider from "@mui/material/Slider";
 import { useState } from "react";
 import axios from 'axios';
 import { Alert } from "@mui/material";
+import Swal from "sweetalert2";
 
 const AddManger = () => {
 
@@ -51,6 +52,11 @@ const AddManger = () => {
       console.log(image);
       const res2 =  await axios.post('http://localhost:8000/api/users/uploads', formData);
       console.log('after 2nd');
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Manager is Added',
+      })
 
     } catch (error) {
       console.log(error);

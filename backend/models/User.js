@@ -54,7 +54,7 @@ userSchema.statics.createManager = async function(name, email, phone, cnic, addr
     console.log('asdasd');
     console.log(name, email, phone, cnic, address, username, password, pay, type, image);
     //Validation
-    if(!email || !password){
+    if(!email || !password || !phone || !cnic  || !name || !address || !username || !pay || !type || !image){
         throw Error('All Fields must be filled');
     }
     if(!validator.isEmail(email)){

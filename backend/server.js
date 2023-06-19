@@ -9,6 +9,7 @@ const productRoutes = require("./routes/product");
 const payRoutes = require("./routes/pay");
 const attendenceRoutes = require("./routes/attendence");
 const expenseRoutes = require("./routes/expense");
+const assetRoutes = require('./routes/asset');
 const { default: mongoose } = require("mongoose");
 
 //Middlewares
@@ -16,13 +17,14 @@ app.use(express.json());
 app.use(fileUpload());
 app.use(cors());
 app.use(express.static("./public"));
-//app.use("/public/uploads/", express.static("public"));
+
 //Routes
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/pay", payRoutes);
 app.use("/api/attendence", attendenceRoutes);
 app.use("/api/expense", expenseRoutes);
+app.use("/api/assets", assetRoutes);
 
 const port = process.env.PORT;
 const start = async () => {

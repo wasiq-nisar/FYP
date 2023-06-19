@@ -100,7 +100,7 @@ const UpdateAndDeleteManager = () => {
               </Link>
             </div>
             <Link key={params.row.id} to={"/UpdateManagerInfo/" + params.row._id}>
-              <div className="text-red-500 text-2xl font-bold hover:cursor-pointer" onClick={handleDelete}>
+              <div className="text-red-500 text-2xl font-bold hover:cursor-pointer">
                 {" "}
                 <DeleteIcon></DeleteIcon>
               </div>

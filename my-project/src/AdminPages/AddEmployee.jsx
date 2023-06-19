@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddEmployee = () => {
 
@@ -49,6 +50,11 @@ const AddEmployee = () => {
       console.log(image);
       const res2 =  await axios.post('http://localhost:8000/api/users/uploads', formData);
       console.log('after 2nd');
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Employee is Added',
+      })
 
     } catch (error) {
       console.log(error);
