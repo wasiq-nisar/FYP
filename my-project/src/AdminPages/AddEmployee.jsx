@@ -74,7 +74,7 @@ const AddEmployee = () => {
     <div className="w-full ">
     <form onSubmit={handleSubmit}>
       <div className="bg-white mx-4 my-5 px-4 py-4 rounded-lg shadow-white">
-        <h1 className="text-xl  flex justify-center font-bold">Add Manager</h1>
+        <h1 className="text-xl  flex justify-center font-bold">Add Employee</h1>
         <div className="flex w-full gap-4 pb-2">
           <div className="flex-col w-1/2">
             <div>
