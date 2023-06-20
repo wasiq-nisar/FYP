@@ -58,11 +58,12 @@ const AddEmployee = () => {
 
     } catch (error) {
       console.log(error);
-      if(error.response.data){
-        setError(error.response.data.msg);
-      }
-      else{
-        setError(null);
+      if(error.response){
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.msg
+        })
       }
     }
     

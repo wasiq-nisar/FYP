@@ -63,11 +63,12 @@ const AddManger = () => {
       
     } catch (error) {
       console.log(error);
-      console.log(error.response.data);
-      if (error.response.data) {
-        setError(error.response.data.msg);
-      } else {
-        setError(null);
+      if(err.response){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.msg
+        })
       }
     }
   };

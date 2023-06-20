@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import "./Login.css";
 import { userContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -24,7 +26,12 @@ const Login = () => {
     console.log("hte json value is ", json);
     if (!response.ok) {
       setIsLoading(false);
-      setError(json.error);
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: json.error
+      })
+    
     }
 
     if (response.ok) {

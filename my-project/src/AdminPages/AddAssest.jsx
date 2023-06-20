@@ -38,11 +38,11 @@ const AssestManagment = () => {
       
     } catch (err) {
       console.log(err);
-      if(error.response){
+      if(err.response){
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: error.response.data.msg
+            text: err.response.data.msg
           })
       }
     }   

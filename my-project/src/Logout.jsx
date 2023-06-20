@@ -9,13 +9,8 @@ const Logout = () => {
     //* idher hum bus backend se logout api ko call kar rahy ha
     const res = await fetch("/logout", {
       method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
     });
-    dispatch({ type: "user", payload: "" });
+    dispatch({ type: "", payload: null });
     //todo api called and we called the login page to frontend
     console.log("logout button pressed");
     navigate("/");
