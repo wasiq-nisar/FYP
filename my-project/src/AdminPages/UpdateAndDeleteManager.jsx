@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 const UpdateAndDeleteManager = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const [data, setData] = useState([]);
+
   const handleDelete = async () => {
     let res;
     try {
@@ -24,7 +26,7 @@ const UpdateAndDeleteManager = () => {
 
     if (res.status === 400) {
       console.log("no credential found");
-      // navigate("/UpdateAndDeleteManager");
+      navigate("/AdminDashboard");
     }
     //* if data is not found
     if (res.status === 200);
@@ -32,11 +34,11 @@ const UpdateAndDeleteManager = () => {
       const data = await res.json();
       //* is data ma sarraa user ka dataaa jay ga
       setData(data);
-      // navigate("/UpdateAndDeleteManager");
+      console.log("user deleted");
+      navigate("/AdminDashboard");
     }
   };
 
-  const [data, setData] = useState([]);
   const callAboutUrlFromBackend = async () => {
     let res;
     try {
@@ -63,7 +65,7 @@ const UpdateAndDeleteManager = () => {
 
   useEffect(() => {
     callAboutUrlFromBackend();
-  }, []);
+  }, [data]);
 
   const columns = [
     { field: "_id", headerName: "ID", width: 135 },
@@ -127,8 +129,14 @@ const UpdateAndDeleteManager = () => {
                 </button>
               </Link>
             </div>
-            <Link key={params.row.id} to={"/UpdateManagerInfo/" + params.row._id}>
-              <div onClick={handleDelete} className="text-red-500 text-2xl font-bold hover:cursor-pointer">
+            <Link
+              key={params.row.id}
+              to={"/UpdateAndDeleteManager/" + params.row._id}
+            >
+              <div
+                onClick={handleDelete}
+                className="text-red-500 text-2xl font-bold hover:cursor-pointer"
+              >
                 {" "}
                 <DeleteIcon></DeleteIcon>
               </div>

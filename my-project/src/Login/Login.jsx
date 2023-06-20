@@ -31,7 +31,6 @@ const Login = () => {
           title: 'Oops...',
           text: json.error
       })
-    
     }
 
     if (response.ok) {
