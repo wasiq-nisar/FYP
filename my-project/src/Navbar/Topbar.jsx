@@ -2,11 +2,14 @@ import React from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LanguageIcon from "@mui/icons-material/Language";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Sidebar from "../Navbar/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useCart } from "../context/cartContext";
 const Topbar = () => {
   const [clicked, isClicked] = useState(false);
+  const [cart] = useCart();
   return (
     <>
       <div className="flex w-full px-4 py-3 bg-white justify-between">
@@ -17,7 +20,10 @@ const Topbar = () => {
           <NotificationsIcon></NotificationsIcon>
           <LanguageIcon></LanguageIcon>
           <SettingsIcon></SettingsIcon>
-
+          <NavLink to='/cart'>
+            Cart {cart.length}
+            <ShoppingCartIcon></ShoppingCartIcon>
+          </NavLink>
           <Link to="/">
             <h1 className="text-xl hover:cursor-pointer font-semibold bg-slate-400 hover:transition hover:bg-slate-900 hover:text-stone-50 hover:duration-500 rounded-xl  px-3 py-1">
               Login

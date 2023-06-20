@@ -3,6 +3,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import {useState} from 'react';
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
 
@@ -52,6 +53,11 @@ const AddProduct = () => {
       console.log(image);
       const res2 =  await axios.post('http://localhost:8000/api/products/uploads', formData);
       console.log('after 2nd');
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Product is Added',
+      })
     } catch (error) {
       console.log(error);
     }

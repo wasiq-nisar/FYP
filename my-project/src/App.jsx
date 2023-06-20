@@ -33,6 +33,7 @@ import Logout from "./Logout";
 //* to import the reducer function
 import { initialState, reducer } from "./reducer/userReducer";
 import Login from "./Login/Login";
+import Cart from "./OrderManager/Cart";
 export const userContext = createContext();
 const Routing = () => {
   return (
@@ -45,6 +46,7 @@ const Routing = () => {
         <Route exact path="/AddManger" element={<AddManger />} />
         <Route exact path="/AddEmployee" element={<AddEmployee />} />
         <Route exact path="/showProducts" element={<ShowAllProducts />} /> 
+        <Route exact path="/cart" element={<Cart />} />
         <Route
           exact
           path="/UpdateAndDeleteManager"

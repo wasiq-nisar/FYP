@@ -37,8 +37,14 @@ const AssestManagment = () => {
       })
       
     } catch (err) {
-      console.log(err.response);
-      //setError(err.response.data.msg);
+      console.log(err);
+      if(error.response){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.response.data.msg
+          })
+      }
     }   
   }
 
