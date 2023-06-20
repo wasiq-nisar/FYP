@@ -10,6 +10,7 @@ const payRoutes = require("./routes/pay");
 const attendenceRoutes = require("./routes/attendence");
 const expenseRoutes = require("./routes/expense");
 const assetRoutes = require('./routes/asset');
+const orderRoutes = require('./routes/order');
 const { default: mongoose } = require("mongoose");
 
 //Middlewares
@@ -25,6 +26,7 @@ app.use("/api/pay", payRoutes);
 app.use("/api/attendence", attendenceRoutes);
 app.use("/api/expense", expenseRoutes);
 app.use("/api/assets", assetRoutes);
+app.use("/api/order", orderRoutes);
 
 const port = process.env.PORT;
 const start = async () => {

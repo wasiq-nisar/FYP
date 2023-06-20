@@ -18,10 +18,12 @@ const addProduct = async(req, res) =>{
     if(!manufacturername || !productname || !price || !manufacturingdate || !category || !manufacturingLocation || !quantity || !description || !image){
         throw Error(`* Fields are required!!`);
     }
-    if(manufacturingdate > Date.now()){
+    const date = new Date();
+    console.log(date);
+    if(manufacturingdate > date){
         throw Error('Manufacturing Date must be Less than System Date');
     }
-    if(expirationdate && expirationdate < Date.now()){
+    if(expirationdate && expirationdate < date){
         throw Error('Expiration Date must be Greater than System Date');
     }
     if(discount && discount < 0 || discount > 100){
@@ -33,15 +35,15 @@ const addProduct = async(req, res) =>{
     if(quantity <= 0){
         throw Error('Quantity must be greater than 0');
     }
-
     //Get img name
     const newImage = image.split("//").at(-1);
 
     //Get img extension
     const ext = newImage.split(".").at(-1);
     try {
+        discountedPrice = price - (price * (discount / 100.0));
         console.log('start');
-        const product = await Product.create({manufacturername, productname, price, manufacturingdate, expirationdate, discount, subcategory, category, quantity, manufacturingLocation, description, image})
+        const product = await Product.create({manufacturername, productname, price: discountedPrice, manufacturingdate, expirationdate, discount, subcategory, category, quantity, manufacturingLocation, description, image})
         console.log('end');
         const imagePath = `/public/products/${product._id}.${ext}`;
         const finalProduct = await Product.findOneAndUpdate({ _id: product._id },

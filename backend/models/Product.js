@@ -34,7 +34,12 @@ const productSchema = new mongoose.Schema({
   quantity:{
     type: Number,
     required: true,
-    min: 1
+    validate: {
+      validator: function (value) {
+        return value >= 0;
+      },
+      message: "Total price must be greater than 0.",
+    },
   },
   manufacturingLocation: {
     type: String,
