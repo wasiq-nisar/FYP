@@ -2,40 +2,14 @@ import React from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LanguageIcon from "@mui/icons-material/Language";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Sidebar from "../Navbar/Sidebar";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { userContext } from "../App";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useCart } from "../context/cartContext";
 const Topbar = () => {
   const [clicked, isClicked] = useState(false);
-
-  const { state, dispatch } = useContext(userContext);
-  const UserLoggedIN = () => {
-   
-    if (state === "" || state === null) {
-       console.log("the state value is ", state);
-      return (
-        <>
-          {" "}
-          <Link to="/">
-            <h1 className="text-xl hover:cursor-pointer font-semibold bg-slate-400 hover:transition hover:bg-slate-900 hover:text-stone-50 hover:duration-500 rounded-xl  px-3 py-1">
-              Login
-            </h1>
-          </Link>
-        </>
-      );
-    } else {
-      return (
-        <Link to="/logout">
-          <h1 className="text-xl hover:cursor-pointer font-semibold bg-slate-400 hover:transition hover:bg-slate-900 hover:text-stone-50 hover:duration-500 rounded-xl  px-3 py-1">
-            Logout
-          </h1>
-        </Link>
-      );
-    }
-  };
-
+  const [cart] = useCart();
   return (
     <>
       <div className="flex w-full px-4 py-3 bg-white justify-between">
@@ -46,7 +20,15 @@ const Topbar = () => {
           <NotificationsIcon></NotificationsIcon>
           <LanguageIcon></LanguageIcon>
           <SettingsIcon></SettingsIcon>
-          <UserLoggedIN />
+          <NavLink to='/cart'>
+            <ShoppingCartIcon></ShoppingCartIcon>
+            {cart.length}
+          </NavLink>
+          <Link to="/">
+            <h1 className="text-xl hover:cursor-pointer font-semibold bg-slate-400 hover:transition hover:bg-slate-900 hover:text-stone-50 hover:duration-500 rounded-xl  px-3 py-1">
+              Login
+            </h1>
+          </Link>
           <div className="block lg:hidden" onClick={() => isClicked(!clicked)}>
             <i
               className={`${
