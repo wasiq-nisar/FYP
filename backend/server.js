@@ -3,6 +3,7 @@ const app = express();
 require("dotenv").config();
 var cors = require("cors");
 const fileUpload = require("express-fileupload");
+const cookieParser = require('cookie-parser')
 
 const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/product");
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(fileUpload());
 app.use(cors());
 app.use(express.static("./public"));
+app.use(cookieParser());
 
 //Routes
 app.use("/api/users", userRoutes);
@@ -27,6 +29,11 @@ app.use("/api/attendence", attendenceRoutes);
 app.use("/api/expense", expenseRoutes);
 app.use("/api/assets", assetRoutes);
 app.use("/api/order", orderRoutes);
+
+app.get('/',(req, res)=>{
+  console.log(req.cookies);
+  res.send('Hello')
+})
 
 const port = process.env.PORT;
 const start = async () => {

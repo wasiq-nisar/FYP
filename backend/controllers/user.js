@@ -1,10 +1,12 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+const checkPermissions = require('../utils/checkPermissions');
 
-const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+const createToken = (_id, email, type) => {
+  return jwt.sign({ _id, email, type }, process.env.SECRET, { expiresIn: "3d" });
 };
+
 
 const getAllUsers = async (req, res) => {
   try {
@@ -19,10 +21,11 @@ const getAllUsers = async (req, res) => {
 const getUser = async (req, res) => {
   const { id: userID } = req.params;
   try {
-    const user = await User.find({ _id: userID });
+    const user = await User.findOne({ _id: userID });
     if (!user) {
       res.status(404).json({ msg: `No user with ID: ${userID}` });
     }
+    checkPermissions(req.user, user._id)
     return res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ msg: error.message });
@@ -115,7 +118,13 @@ const loginUser = async (req, res) => {
     const user = await User.login(email, password);
 
     // create a token
-    const token = await createToken(user._id);
+    const token = createToken(user._id, user.email, user.type);
+
+    const oneDay = 1000 * 60 * 60 * 24;
+    res.cookie('token', token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + oneDay)
+    })
     const type = user.type;
 
     res.status(200).json({ email, type, token });
@@ -123,6 +132,17 @@ const loginUser = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+const logout = async(req, res) =>{
+  res.cookie('token', 'logout', {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+    secure: process.env.NODE_ENV === "production",
+    signed: true,
+    sameSite: none
+  })
+  res.status(200).json({msg: 'User logged Out'});
+}
 
 const uploadUserImage = async (req, res) => {
   //try {
@@ -158,5 +178,6 @@ module.exports = {
   deleteUser,
   updateUser,
   loginUser,
+  logout,
   uploadUserImage,
 };

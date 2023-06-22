@@ -43,7 +43,7 @@ const AssestManagment = () => {
             icon: 'error',
             title: 'Oops...',
             text: err.response.data.msg
-          })
+        })
       }
     }   
   }

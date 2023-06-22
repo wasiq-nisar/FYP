@@ -3,10 +3,12 @@ import { categories } from "../assets/data";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/cartContext";
 import toast from 'react-hot-toast'
+import SearchBox from "../components/SearchBox/SearchBox";
 const ShowAllProducts = () => {
 
   const [cart, setCart] = useCart();
   const [data, setData] = useState([]);
+  const [searchField, setSearchField] = useState('');
   const callAboutUrlFromBackend = async () => {
     let res;
     try {
@@ -36,28 +38,35 @@ const ShowAllProducts = () => {
     callAboutUrlFromBackend();
   }, []);
 
-
-  return (
-    <div className="w-full py-2 grid h-[350px] grid-cols-1 lg:grid-cols-3 lg:gap-2 ">
-      {data.map((cate) => (
-        <div className="card">
-          <img src={"http://localhost:8000/products/" + cate.image.split("/").at(-1)} className="card-img-top"  style={{height: "220px"}}/>
-          <div className="card-body">
-            <h5 className="card-title">{cate.productname}</h5>
-            <p className="card-text text-primary">{cate.description}</p>
-            <p className="card-text text-danger">Rs. {cate.price}</p>
-            <br />
-            <button onClick={()=> { 
-              console.log(cart.length)
-              console.log(cart);
-              setCart([...cart, cate]);
-              //localStorage.setItem('cart', JSON.stringify([...cart, p]))
-              toast.success('Item Added to Cart')
-              }}  
-              className="btn btn-primary">Add to Cart</button>
+  const filteredProducts = data.filter((prod) =>{
+    prod.productname.toLowerCase().includes(searchField.toLowerCase())
+  });
+  return (   
+    <div>
+      <SearchBox placeholder='Search Products' handleChange={(e) => {
+        setSearchField(e.target.value);
+        }} />
+      <div className="w-full py-2 grid h-[350px] grid-cols-1 lg:grid-cols-3 lg:gap-2 ">
+        {data.map((cate) => (
+          <div key={cate._id} className="card">
+            <img src={"http://localhost:8000/products/" + cate.image.split("/").at(-1)} className="card-img-top"  style={{height: "220px"}}/>
+            <div className="card-body">
+              <h5 className="card-title">{cate.productname}</h5>
+              <p className="card-text text-primary">{cate.description}</p>
+              <p className="card-text text-danger">Rs. {cate.price}</p>
+              <br />
+              <button onClick={()=> { 
+                console.log(cart.length)
+                console.log(cart);
+                setCart([...cart, cate]);
+                //localStorage.setItem('cart', JSON.stringify([...cart, p]))
+                toast.success('Item Added to Cart')
+                }}  
+                className="btn btn-primary">Add to Cart</button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

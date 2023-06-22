@@ -18,10 +18,11 @@ const Login = () => {
     setError(null);
 
     const response = await fetch("http://localhost:8000/api/users/login", {
+      
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-    });
+    }, {credentials:true});
     const json = await response.json();
     console.log("hte json value is ", json);
     if (!response.ok) {
@@ -34,7 +35,8 @@ const Login = () => {
     }
 
     if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(json));
+      console.log(json)
+      
 
       setIsLoading(false);
       const userType = json.type;
